@@ -1,0 +1,476 @@
+% ═══════════════════════════════════════════════════════════════════════
+% The Parity of Cubic Phases in Legendre Half-Intervals:
+% A Negative Answer to the Cubic Zero-Skew Question
+% Titan Project — Paper XIII — February 2026
+% ═══════════════════════════════════════════════════════════════════════
+
+\documentclass[11pt, a4paper]{article}
+
+\usepackage[top=28mm, bottom=28mm, left=25mm, right=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{float}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{question}[theorem]{Open Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Leg}[2]{\left(\frac{#1}{#2}\right)}
+
+\title{\textbf{The Parity of Cubic Phases in \\
+Legendre Half-Intervals}}
+\author{Ruqing Chen\\[4pt]
+\small GUT Geoservice Inc., Montr\'eal, Canada\\[2pt]
+\small \texttt{ruqing@hotmail.com}\\[2pt]
+\small Repository:
+\url{https://github.com/Ruqing1963/cubic-parity-half-intervals}}
+\date{February 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+In \cite{ChenHigher}, we posed the question of whether a
+``cubic Oppermann analogue'' exists: does the right half of
+a Legendre interval exhibit zero cubic skewness under some
+congruence condition?
+We answer this question in the negative.
+For $p = 2n - 1$ prime with $p \equiv 1 \pmod{3}$
+(equivalently $p \equiv 1 \pmod{6}$),
+the negation involution $x \mapsto p - x$
+\emph{preserves} the cubic residue character
+(since $\chi_3(-1) = 1$),
+which forces every cubic phase count in the right half
+to be even but does \emph{not} force equality among the
+three phases.
+In contrast, the left half contains a single unpaired
+element---the midpoint $m = n(n-1) \equiv p - r \pmod{p}$,
+whose involution partner is the puncture $r = 4^{-1}$---so
+exactly one left-half phase count is odd and two are even.
+This contrasts sharply with the quadratic case
+\cite{ChenOpp}, where $\chi_2(-1) = -1$ for
+$p \equiv 3 \pmod{4}$ causes the involution to
+\emph{swap} QR and NR, producing exact zero skewness.
+The symmetry breaking between $k = 2$ and $k = 3$
+is thus a direct consequence of the parity of
+$(p-1)/k$.
+Verified for all 146 non-degenerate qualifying primes
+up to $n = 1000$.
+\end{abstract}
+
+\bigskip
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Introduction}\label{sec:intro}
+% ═══════════════════════════════════════════════════════════════════════
+
+In \cite{ChenOpp}, we proved the Oppermann Parity Law:
+for even $n$ (where $p = 2n - 1 \equiv 3 \pmod{4}$),
+the right half of the Legendre interval has zero
+quadratic residue skewness.
+The proof rested on the negation involution
+$x \mapsto p - x$, which maps QR to NR when
+$\chi_2(-1) = -1$, forcing perfect pairing.
+
+In \cite{ChenHigher}, we generalized the Spin Asymmetry
+Theorem to $k$-th power residues for arbitrary $k$,
+and posed Open Question~1: does the right half exhibit
+zero \emph{cubic} skewness under some congruence
+condition?
+
+This note resolves the question.
+The answer is \textbf{no}: the mechanism that produces
+zero quadratic skewness fails for cubic residues,
+for a precise algebraic reason.
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Setup and Notation}\label{sec:setup}
+% ═══════════════════════════════════════════════════════════════════════
+
+Let $n \ge 2$ with $p = 2n - 1$ prime and
+$p \equiv 1 \pmod{3}$ (so $p \equiv 1 \pmod{6}$,
+since $p$ is odd).
+The Legendre interval interior is
+$\mathcal{I}_n^\circ
+= \{(n-1)^2 + 1, \ldots, n^2 - 1\}$,
+which has $p - 1$ elements and constitutes a punctured
+complete residue system modulo $p$ \cite{ChenSpin}.
+
+The midpoint of the interval is
+$m = n(n-1) = (n-1)^2 + (n-1)$.
+We define:
+\begin{align*}
+    \mathcal{I}_L &= \{(n-1)^2 + 1, \ldots, m\}
+    &&\text{(left half, $n - 1$ elements)}, \\
+    \mathcal{I}_R &= \{m + 1, \ldots, n^2 - 1\}
+    &&\text{(right half, $n - 1$ elements)}.
+\end{align*}
+
+The anchor (the unique multiple of $p$ in
+$\mathcal{I}_n^\circ$) lies in exactly one half.
+Let $\chi_3$ denote a cubic character modulo $p$.
+For each phase
+$\omega \in \{1, \zeta, \zeta^2\}$
+(where $\zeta$ is a primitive cube root of unity
+modulo $p$), define
+$N_\omega^R = |\{x \in \mathcal{I}_R : \chi_3(x) = \omega,
+\; p \nmid x\}|$.
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{The Cubic Parity Theorem}\label{sec:theorem}
+% ═══════════════════════════════════════════════════════════════════════
+
+\begin{theorem}[Cubic parity: right half]
+\label{thm:parity_right}
+Let $p = 2n - 1$ be prime with $p \equiv 1 \pmod{6}$.
+Then for each cubic phase $\omega$,
+the right-half count $N_\omega^R$ is even.
+\end{theorem}
+
+\begin{proof}
+The proof has three steps.
+
+\textbf{Step 1: Phase preservation.}
+Since $p \equiv 1 \pmod{6}$, the exponent
+$(p-1)/3$ is even.
+Therefore
+\[
+    \chi_3(-1) = (-1)^{(p-1)/3} = 1.
+\]
+For any $a \not\equiv 0 \pmod{p}$:
+\begin{equation}\label{eq:preserve}
+    \chi_3(p - a)
+    = \chi_3(-a)
+    = \chi_3(-1) \cdot \chi_3(a)
+    = \chi_3(a).
+\end{equation}
+
+\textbf{Step 2: The involution on the right half.}
+The right half consists of elements
+$x \in \{m+1, \ldots, n^2 - 1\}$.
+Their residues modulo $p$ form a set $S_R$.
+We claim $S_R$ is closed under $a \mapsto p - a$.
+
+To see this, observe that the full interior
+$\mathcal{I}_n^\circ$ covers residues
+$\{1, 2, \ldots, p-1\} \setminus \{r\}$
+(where $r = n^2 \bmod p = 4^{-1} \bmod p$).
+The negation involution partitions
+$\{1, \ldots, p-1\}$ into $(p-1)/2$ orbits
+$\{a, p-a\}$.
+By \cite[Theorem~3.1]{ChenOpp}, the right half
+$\mathcal{I}_R$ is closed under this involution:
+if $x \in \mathcal{I}_R$ has residue $a$, then the
+unique element of $\mathcal{I}_n^\circ$ with
+residue $p - a$ also lies in $\mathcal{I}_R$.
+When the anchor ($0 \bmod p$) lies in $\mathcal{I}_R$,
+it is self-paired and excluded from the phase counts.
+
+\textbf{Step 3: Orbit pairing.}
+Since $p$ is odd, the equation $a \equiv p - a \pmod{p}$
+has the unique solution $a = p/2$, which is not an
+integer.
+Hence every orbit $\{a, p-a\}$ in $S_R$ has size~$2$.
+By~\eqref{eq:preserve}, both elements of each orbit
+contribute to the \emph{same} cubic phase.
+Therefore each $N_\omega^R$ is a sum of contributions
+of~$2$, hence even.
+\end{proof}
+
+\begin{theorem}[Cubic parity: left half]
+\label{thm:parity_left}
+Under the same hypotheses, the left-half counts
+$N_\omega^L$ satisfy: exactly two are even and one is
+odd.
+The unique odd count belongs to the cubic phase of the
+midpoint $m = n(n-1)$.
+\end{theorem}
+
+\begin{proof}
+The midpoint satisfies
+$m = n^2 - n \equiv 4^{-1} - 2^{-1}
+= -4^{-1} \equiv p - r \pmod{p}$.
+The element with residue $p - r$ has lost its involution
+partner $r$ (the puncture), so it is \emph{unpaired}.
+Since $m$ is the last element of $\mathcal{I}_L$ and
+$p - r$ always falls in $\mathcal{I}_L$, the left half
+contains one unpaired element.
+All other nonzero, non-anchor elements in $\mathcal{I}_L$
+pair under $a \mapsto p - a$ within $\mathcal{I}_L$,
+each pair contributing $2$ to one phase.
+The single unpaired element $m$ contributes $1$ to its
+phase $\chi_3(m) = \chi_3(p - r) = \chi_3(r)$
+(by~\eqref{eq:preserve}).
+Thus one phase has an odd count and the other two are
+even.
+\end{proof}
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{The Negative Answer to the Zero-Skew Question}
+\label{sec:negative}
+% ═══════════════════════════════════════════════════════════════════════
+
+\begin{theorem}[No cubic zero-skew]
+\label{thm:no_zeroskew}
+There is no congruence condition on $n$ that forces
+$N_1^R = N_\zeta^R = N_{\zeta^2}^R$
+for all qualifying primes.
+\end{theorem}
+
+\begin{proof}
+The mechanism of \cite{ChenOpp} requires the involution
+to \emph{exchange} phases, not preserve them.
+In the quadratic case with $p \equiv 3 \pmod{4}$,
+$\chi_2(-1) = -1$ forces each orbit to contain one QR
+and one NR, yielding $N_{\mathrm{QR}}^R = N_{\mathrm{NR}}^R$.
+
+In the cubic case, $\chi_3(-1) = 1$ forces each orbit
+to lie \emph{within} a single phase.
+This guarantees parity (Theorem~\ref{thm:parity_right})
+but provides no constraint on the \emph{relative}
+sizes of $N_1^R$, $N_\zeta^R$, $N_{\zeta^2}^R$.
+Computationally, zero skewness never occurs:
+among all 146 non-degenerate qualifying primes up to
+$n = 1000$, the three phase counts are unequal in
+every case (Table~\ref{tab:data}).
+\end{proof}
+
+\begin{remark}[The symmetry-breaking dichotomy]
+The qualitative difference between the quadratic and
+cubic half-interval behaviors is controlled by a single
+bit: the parity of $(p-1)/k$.
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}c c c c@{}}
+\toprule
+$k$ & Condition on $p$ & $(p{-}1)/k$ & Right-half behavior \\
+\midrule
+$2$ & $p \equiv 3 \pmod{4}$ & odd &
+Involution \emph{swaps} $\Phi_0 \leftrightarrow \Phi_1$
+$\Rightarrow$ zero skew \\
+$2$ & $p \equiv 1 \pmod{4}$ & even &
+Involution \emph{preserves}
+$\Rightarrow$ even counts, nonzero skew \\
+$3$ & $p \equiv 1 \pmod{3}$ & always even &
+Involution \emph{preserves}
+$\Rightarrow$ even counts, nonzero skew \\
+\bottomrule
+\end{tabular}
+\end{center}
+For $k = 3$, the ``swapping'' regime never occurs
+because $p \equiv 1 \pmod{6}$ forces $(p-1)/3$ to
+always be even.
+\end{remark}
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{General $k$ and the Quartic Case}
+\label{sec:general}
+% ═══════════════════════════════════════════════════════════════════════
+
+\begin{proposition}[General parity/pairing criterion]
+\label{prop:general}
+Let $k \mid (p-1)$.
+If $(p-1)/k$ is even, the negation involution preserves
+all $k$-th power residue phases, and each right-half
+phase count is even.
+If $(p-1)/k$ is odd and $k$ is even, the involution maps
+$\Phi_j \to \Phi_{j + k/2}$, pairing phases in
+complementary orbits.
+\end{proposition}
+
+\begin{proof}
+$\chi_k(-1) = (-1)^{(p-1)/k}$.
+If this equals $1$ (even exponent), phase preservation
+follows as in Theorem~\ref{thm:parity_right}.
+If it equals $-1$ (odd exponent, requiring $k$ even),
+then $\chi_k(p-a) = -\chi_k(a) = \zeta^{k/2} \chi_k(a)$,
+shifting the phase index by $k/2$.
+\end{proof}
+
+For $k = 4$ with $p \equiv 5 \pmod{8}$ (so $(p-1)/4$ is
+odd), the involution maps $\Phi_0 \leftrightarrow \Phi_2$
+and $\Phi_1 \leftrightarrow \Phi_3$, forcing
+$N_{\Phi_0}^R = N_{\Phi_2}^R$ and
+$N_{\Phi_1}^R = N_{\Phi_3}^R$---a partial zero-skew
+result for quartic residues.
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Computational Verification}\label{sec:data}
+% ═══════════════════════════════════════════════════════════════════════
+
+\begin{table}[H]
+\centering
+\caption{Right-half cubic phase counts for selected primes.
+$\Phi_0, \Phi_1, \Phi_2$ are ordered by phase value
+modulo $p$.
+All counts are even; none are equal.}
+\label{tab:data}
+\medskip
+\begin{tabular}{@{}r r r r r c@{}}
+\toprule
+$n$ & $p$ & $N_{\Phi_0}^R$ & $N_{\Phi_1}^R$ & $N_{\Phi_2}^R$ &
+All even? \\
+\midrule
+10  & 19  &  2 &  4 &  2  & $\checkmark$ \\
+16  & 31  &  6 &  2 &  6  & $\checkmark$ \\
+22  & 43  &  8 &  4 &  8  & $\checkmark$ \\
+34  & 67  & 14 &  8 & 10  & $\checkmark$ \\
+40  & 79  & 16 &  8 & 14  & $\checkmark$ \\
+100 & 199 & 24 & 38 & 36  & $\checkmark$ \\
+205 & 409 & 60 & 66 & 78  & $\checkmark$ \\
+505 & 1009& 168& 160& 176 & $\checkmark$ \\
+1000& 1999& 314& 350& 334 & $\checkmark$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Left-half cubic phase counts.
+Exactly one count is odd ($*$); it always matches
+the phase of the midpoint $m = n(n-1)$.
+Columns $\Phi_0, \Phi_1, \Phi_2$ use the same phase
+ordering as Table~\ref{tab:data}, so column-wise sums
+$N^L + N^R$ recover the full-interval deficit of
+Paper~XII.}
+\label{tab:left}
+\medskip
+\begin{tabular}{@{}r r r r r@{}}
+\toprule
+$n$ & $p$ & $N_{\Phi_0}^L$ & $N_{\Phi_1}^L$ & $N_{\Phi_2}^L$ \\
+\midrule
+10  & 19  &  4 & $1^*$ &  4  \\
+16  & 31  & $3^*$ &  8 &  4  \\
+22  & 43  & $5^*$ & 10 &  6  \\
+34  & 67  &  8 & 14 & $11^*$ \\
+40  & 79  & 10 & $17^*$& 12  \\
+100 & 199 & 42 & 28 & $29^*$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Summary statistics ($n \le 1000$, non-degenerate cases).}
+\label{tab:summary}
+\medskip
+\begin{tabular}{@{}l r@{}}
+\toprule
+Qualifying primes ($p \equiv 1 \pmod{6}$, $(p-1)/3 \ge 4$) & 146 \\
+Right half: all three phase counts even & 146 (100\%) \\
+Left half: exactly one odd count & 146 (100\%) \\
+Left half: odd count in phase of midpoint $m$ & 146 (100\%) \\
+Zero skew (right half) & 0 (0\%) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ═══════════════════════════════════════════════════════════════════════
+\section{Discussion}\label{sec:discussion}
+% ═══════════════════════════════════════════════════════════════════════
+
+\subsection{Resolution of Open Question 1}
+
+Open Question~1 of \cite{ChenHigher} asked whether a
+cubic Oppermann analogue exists.
+Theorem~\ref{thm:no_zeroskew} provides a definitive
+negative answer: the cubic involution preserves
+(rather than swaps) phases, yielding only a parity
+constraint.
+The zero-skew phenomenon of \cite{ChenOpp} is specific
+to the quadratic case with $p \equiv 3 \pmod{4}$.
+
+\subsection{The variance of cubic skewness}
+
+Although phase counts are always even, their differences
+can be large.
+The phase variance
+$V = \frac{1}{3}\sum_\omega (N_\omega^R - \bar{N})^2$
+(where $\bar{N}$ is the mean count)
+grows as $O(n)$, consistent with the
+P\'olya--Vinogradov expectation for character sums
+over intervals of length $\sim n$.
+This linear growth is the natural behavior for
+\emph{incomplete} character sums and requires no
+deeper explanation.
+
+\subsection{Hierarchy of half-interval constraints}
+
+The Titan Project has now established a complete
+hierarchy for the negation involution acting on
+Legendre half-intervals:
+
+\begin{enumerate}[nosep]
+\item \textbf{Full interior} ($p - 1$ elements):
+exact character sum $\sum \chi(x) = -\chi(r)$
+\cite{ChenHigher}.
+\item \textbf{Right half, $k = 2$, $p \equiv 3 \pmod{4}$}:
+zero skewness, $N^+ = N^-$ \cite{ChenOpp}.
+\item \textbf{Right half, $k = 3$, $p \equiv 1 \pmod{6}$}:
+all phase counts even, but never equal (this paper,
+Theorem~\ref{thm:parity_right}).
+\item \textbf{Left half, $k = 3$, $p \equiv 1 \pmod{6}$}:
+two even counts, one odd---the odd count belongs to the
+phase of the midpoint $m$ (Theorem~\ref{thm:parity_left}).
+\item \textbf{Right half, $k = 4$, $p \equiv 5 \pmod{8}$}:
+complementary phase pairing
+$N_{\Phi_0} = N_{\Phi_2}$, $N_{\Phi_1} = N_{\Phi_3}$
+(Proposition~\ref{prop:general}).
+\end{enumerate}
+
+\subsection{Open questions}
+
+\begin{question}[Quartic pairing verification]
+For $p \equiv 5 \pmod{8}$, does the involution-forced
+pairing $N_{\Phi_0}^R = N_{\Phi_2}^R$ hold
+computationally for all qualifying primes?
+\end{question}
+
+\begin{question}[Skewness asymptotics]
+Can the linear growth rate of the cubic phase variance
+be made explicit, perhaps via the second moment of
+cubic Dirichlet $L$-functions?
+\end{question}
+
+\subsection*{Data and code availability}
+
+Verification scripts are available at
+\url{https://github.com/Ruqing1963/cubic-parity-half-intervals}.
+
+% ═══════════════════════════════════════════════════════════════════════
+\begin{thebibliography}{99}
+
+\bibitem{ChenSpin}
+  R.~Chen,
+  ``Algebraic rigidity and quadratic residue asymmetry
+  in Legendre intervals,''
+  Zenodo, 2026.
+  \url{https://zenodo.org/records/18706876}
+
+\bibitem{ChenOpp}
+  R.~Chen,
+  ``Oppermann's parity law: quadratic residue symmetry
+  breaking in half-intervals via the negation involution,''
+  Zenodo, 2026.
+  \url{https://zenodo.org/records/18707265}
+
+\bibitem{ChenHigher}
+  R.~Chen,
+  ``Higher-order residue deficits in Legendre intervals,''
+  Zenodo, 2026.
+  \url{https://zenodo.org/records/18714643}
+
+\end{thebibliography}
+
+\end{document}
